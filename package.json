@@ -1,0 +1,16 @@
+{
+  "name": "aimara-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Chaucharian/aimara-web.git",
+  "author": "Agustin Salinas <chaucharian@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel -p 8080 watch src/index.html",
+    "build": "parcel src/index.html"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
