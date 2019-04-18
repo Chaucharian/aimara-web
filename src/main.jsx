@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import App from './components/App.jsx';
 
 const Page = () => (
-    <div>
-        <App></App>
-    </div>
+   <App></App>
 );
 
 ReactDOM.render(<Page />, document.getElementById('root'));
