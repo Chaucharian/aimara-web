@@ -7,6 +7,8 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import RemoveIcon from '@material-ui/icons/RemoveCircleOutline';
+import AddIcon from '@material-ui/icons/AddCircleOutline';
 
 const styles = theme => ({
   root: {
@@ -44,6 +46,7 @@ const styles = theme => ({
  *   },
  * ];
  */
+
 function Galery(props) {
 	const { classes, images } = props;
 	let key = 0;
@@ -52,17 +55,19 @@ function Galery(props) {
     <div className={ classes.root }>
       <GridList cellHeight={180} cols={3} className={classes.gridList}>
         { images.map( image => (
-          <GridListTile key={ key++ } className={ classes.image } >
+          <GridListTile key={ key+=1 } className={ classes.image } >
             <img src={ image.src } alt={ image.src } />
             <GridListTileBar
               title={ image.title }
               subtitle={<span>by: YO </span>}
-              actionIcon={
-                <IconButton className={classes.icon}>
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
+              actionIcon={[
+              <IconButton className={classes.icon}>
+                <AddIcon />
+              </IconButton>, 
+              <IconButton className={classes.icon}>
+                <RemoveIcon />
+              </IconButton>
+              ]}/>
           </GridListTile>
         ))}
       </GridList>
