@@ -3,14 +3,23 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchField from "./SearchField";
 import SlideGalery from "./SlideGalery";
 
-const Header = (props) => {
-    const { classes } = props;
+class Header extends Component {
 
-    return(
+    constructor() {
+        super();
+        this.typing = value => this.props.onChange(value);
+    }
+
+    render() {
+        const { classes } = this.props;
+
+        return(
         <div className={classes.root}>
-            <SearchField />
+            <SearchField onChange={this.typing} />
             <SlideGalery />
         </div>);
+    }
+
 };
 
 const styles = theme => ({

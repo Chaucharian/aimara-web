@@ -18,18 +18,21 @@ const styles = {
   }
 };
 
-class CustomizedInputBase extends Component {
+class SearchField extends Component {
 
   constructor(...args) {
     super(...args);
     this.state = { value: '' };
 
-    this.changeHandler = event => { this.setState({ value: event.target.value }); }
+    this.changeHandler = event => this.updateState(event.target.value);//{ this.setState({ value: event.target.value }); }
   }
 
-  onChangeHandler(event) {
-    console.log(event.target.value);
+  updateState(value) {
+    const { onChange } = this.props;
+    onChange(value);
+    this.setState({value});
   }
+
 
   render() {
     const { classes } = this.props;
@@ -46,8 +49,8 @@ class CustomizedInputBase extends Component {
   
 }
 
-CustomizedInputBase.propTypes = {
+SearchField.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CustomizedInputBase);
+export default withStyles(styles)(SearchField);

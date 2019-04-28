@@ -49,15 +49,19 @@ const styles = theme => ({
 
 function Galery(props) {
 	const { classes, images } = props;
-	let key = 0;
+  let key = 0;
+  let idCount = 0;
 
   return (
     <div className={ classes.root }>
       <GridList cellHeight={180} cols={3} className={classes.gridList}>
-        { images.map( image => (
-          <GridListTile key={ key+=1 } className={ classes.image } >
+        { images.map( image => {
+          idCount += 1;
+          return ( 
+          <GridListTile key={idCount} className={ classes.image } >
             <img src={ image.src } alt={ image.src } />
             <GridListTileBar
+              key={idCount}
               title={ image.title }
               subtitle={<span>by: YO </span>}
               actionIcon={[
@@ -68,8 +72,8 @@ function Galery(props) {
                 <RemoveIcon />
               </IconButton>
               ]}/>
-          </GridListTile>
-        ))}
+          </GridListTile>);
+        })}
       </GridList>
     </div>
   );
