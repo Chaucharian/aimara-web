@@ -14,8 +14,12 @@ class App extends Component {
   }
 
   updateState(value) {
-    const filteredItems = items.filter(item => value === item.title);
-    this.setState({items: filteredItems });
+    if(value === '') {
+      this.setState({items: items });
+    } else {
+      const filteredItems = items.filter(item => value === item.title);
+      this.setState({items: filteredItems });
+    }
   }
 
   render() {
