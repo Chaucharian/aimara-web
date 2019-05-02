@@ -1,9 +1,14 @@
+import "regenerator-runtime/runtime";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
+import configureStore from './store/storeConfig.dev';
+import { Provider } from 'react-redux';
 
-const Page = () => (
-   <App></App>
-);
+const store = configureStore();
 
-ReactDOM.render(<Page />, document.getElementById('root'));
+ReactDOM.render(
+   <Provider store={store}>
+      <App />
+   </Provider>
+   , document.getElementById('root'));

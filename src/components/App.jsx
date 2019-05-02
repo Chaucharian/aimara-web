@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Galery from './Galery.jsx';
@@ -9,7 +10,9 @@ class App extends Component {
 
   constructor(...args) {
     super(...args);
+    console.log(this.props.state);
     this.state = { items: items };
+    
     this.changeHandler = value => this.updateState(value);
   }
 
@@ -39,4 +42,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { state };
+}
+
+const mapDispatchToProps = () => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -12,8 +12,12 @@
   "dependencies": {
     "@material-ui/core": "^3.0.0",
     "@material-ui/icons": "^3.0.2",
-    "components": "^0.1.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "http2": "^3.3.7",
+    "react": ">=15",
+    "react-dom": "^16.3.0",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.2",
+    "spdy-transport": "^3.0.0"
   }
 }
