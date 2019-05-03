@@ -1,1 +1,2 @@
 export const FETCH_ALL_IMAGES = "FETCH_ALL_IMAGES";
+export const SEARCH_CRITERIA = "SEARCH_CRITERIA";

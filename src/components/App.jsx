@@ -5,17 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import Galery from './Galery.jsx';
 import items from '../model/items.js';
 import Header from './Header';
+import { FETCH_ALL_IMAGES } from '../actions/types';
 
 class App extends Component {
 
   constructor(...args) {
     super(...args);
-    console.log(this.props.state);
-    this.state = { items: items };
-    
-    this.changeHandler = value => this.updateState(value);
   }
-
+/*
   updateState(value) {
     if(value === '') {
       this.setState({items: items });
@@ -23,10 +20,9 @@ class App extends Component {
       const filteredItems = items.filter(item => value === item.title);
       this.setState({items: filteredItems });
     }
-  }
+  }*/
 
   render() {
-    const { items } = this.state;
     return(   
       <CssBaseline>
         <Grid 
@@ -34,8 +30,8 @@ class App extends Component {
         direction="column"
         justify="center"
         alignItems="center">
-          <Header onChange={this.changeHandler}/>
-          <Galery images={ items } />
+          <Header />
+          <Galery images={items} />
         </Grid>
       </CssBaseline>
     );
@@ -43,11 +39,15 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return { state };
+  return { 
+    items: state.items
+   };
 }
 
-const mapDispatchToProps = () => {
-  return {}
+const mapDispatchToProps = dispatch => {
+  return {
+    loadAllImages: () => dispatch(FETCH_ALL_IMAGES),
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

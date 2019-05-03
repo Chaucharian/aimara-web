@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import SearchField from "./SearchField";
 import SlideGalery from "./SlideGalery";
+import * as actionType from '../actions/search';
 
 class Header extends Component {
 
-    constructor() {
-        super();
-        this.typing = value => this.props.onChange(value);
+    constructor(...args) {
+        super(...args);
+        console.log(this.props);
+        this.searchFieldChageHandle = value => this.props.search(value);
     }
 
     render() {
@@ -15,7 +18,7 @@ class Header extends Component {
 
         return(
         <div className={classes.root}>
-            <SearchField onChange={this.typing} />
+            <SearchField onChange={this.searchFieldChageHandle} />
             <SlideGalery />
         </div>);
     }
@@ -34,4 +37,17 @@ const styles = theme => ({
     }
 });
 
-export default withStyles(styles)(Header);
+const mapStateToProps = state => {
+    return { 
+        currentSearchCriteria: state.currentSearchCriteria,
+        items: []
+     };
+  }
+  
+const mapDispatchToProps = dispatch => {
+    return {
+        search: criteria => dispatch(actionType.search(criteria)),
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));

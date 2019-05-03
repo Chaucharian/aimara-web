@@ -1,5 +1,6 @@
-import * as type from './types';
+import { SEARCH_CRITERIA } from './types';
 
-export const fetchAllImages = () => ({
-    type: type.FETCH_ALL_IMAGES
+export const search = criteria => ({
+    type: SEARCH_CRITERIA,
+    criteria
 }); 
