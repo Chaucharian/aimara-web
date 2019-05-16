@@ -24,8 +24,13 @@ export function* loadImagesByCriteria(action) {
 
     //Tell the store to save the user Info also activate loadDashboardSecuenced
 //    yield put(fetchWeatherSuccess(weather));
-    const result =  items.filter(item => item.title === action.criteria);
-    yield put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items: result });
+    if(action.criteria === '') {
+      yield put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items });
+    } else {
+      const result =  items.filter(item => item.title === action.criteria);
+      yield put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items: result });
+    }
+    
   } catch(error) {
  //   yield put(fetchWeatherFailure('Fetching failed'));
   }
