@@ -16,7 +16,7 @@ export function* loadAllImages() {
   }
 }
 
-export function* loadImagesByCriteria() {
+export function* loadImagesByCriteria(action) {
   try {
 
     //Get User Info
@@ -24,7 +24,8 @@ export function* loadImagesByCriteria() {
 
     //Tell the store to save the user Info also activate loadDashboardSecuenced
 //    yield put(fetchWeatherSuccess(weather));
-
+    const result =  items.filter(item => item.title === action.criteria);
+    yield put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items: result });
   } catch(error) {
  //   yield put(fetchWeatherFailure('Fetching failed'));
   }

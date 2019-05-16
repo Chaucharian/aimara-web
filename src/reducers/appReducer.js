@@ -9,14 +9,12 @@ const initialState = {
 const app = (state = initialState, action)  => {
     switch(action.type) {
       case SEARCH_CRITERIA:
-        return { ...state };
+        return { ...state, currentSearchCriteria: action.criteria };
       case FETCH_ALL_IMAGES:
       state.isFetching = true;  
       return { ...state };
       case FETCH_ALL_IMAGES_SUCCESS:
-        state.items = action.items;  
-        state.isFetching = false;  
-        return { ...state };
+        return { ...state, items: action.items, isFetching: false };
       default :
         return state;
     }
