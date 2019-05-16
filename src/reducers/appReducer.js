@@ -1,14 +1,22 @@
-import FETCH_ALL_IMAGES from '../actions/types';
-import SEARCH_CRITERIA from '../actions/types';
+import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS } from '../actions/types';
 
-const app = (state = {}, action)  => {
+const initialState = {
+    items: [],
+    currentSearchCriteria: '',
+    isFetching: false
+}
+
+const app = (state = initialState, action)  => {
     switch(action.type) {
       case SEARCH_CRITERIA:
-        console.log('sdas');
-      break;
+        return { ...state };
       case FETCH_ALL_IMAGES:
-      console.log('EEA');
-    //  return action.payload;
+      state.isFetching = true;  
+      return { ...state };
+      case FETCH_ALL_IMAGES_SUCCESS:
+        state.items = action.items;  
+        state.isFetching = false;  
+        return { ...state };
       default :
         return state;
     }

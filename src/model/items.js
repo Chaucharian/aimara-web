@@ -1,4 +1,4 @@
-import image from '../images/cannabis.jpg';
+import image from '../images/test.jpeg';
 
 const items = [
     {

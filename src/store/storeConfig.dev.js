@@ -8,7 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, compose(
       applyMiddleware(sagaMiddleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f // add support for Redux dev tools
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.devToolsExtension() : f => f // add support for Redux dev tools
     )
   );
   sagaMiddleware.run(rootSaga);

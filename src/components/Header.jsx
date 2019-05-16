@@ -4,12 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchField from "./SearchField";
 import SlideGalery from "./SlideGalery";
 import * as actionType from '../actions/search';
+import { SEARCH_CRITERIA } from "../actions/types";
 
 class Header extends Component {
 
     constructor(...args) {
         super(...args);
-        console.log(this.props);
         this.searchFieldChageHandle = value => this.props.search(value);
     }
 
@@ -39,8 +39,7 @@ const styles = theme => ({
 
 const mapStateToProps = state => {
     return { 
-        currentSearchCriteria: state.currentSearchCriteria,
-        items: []
+       ... state.app
      };
   }
   
