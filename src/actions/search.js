@@ -1,4 +1,4 @@
-import { SEARCH_CRITERIA } from './types';
+import { SEARCH_CRITERIA, SEARCH } from './types';
 
 export const search = criteria => ({
     type: SEARCH_CRITERIA,

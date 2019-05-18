@@ -4,26 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchField from "./SearchField";
 import SlideGalery from "./SlideGalery";
 import * as actionType from '../actions/search';
-import { SEARCH_CRITERIA } from "../actions/types";
-
-class Header extends Component {
-
-    constructor(...args) {
-        super(...args);
-        this.searchFieldChageHandle = value => this.props.search(value);
-    }
-
-    render() {
-        const { classes } = this.props;
-
-        return(
-        <div className={classes.root}>
-            <SearchField onChange={this.searchFieldChageHandle} />
-            <SlideGalery />
-        </div>);
-    }
-
-};
+import imagee from '../images/aimara_nueces.jpg';
 
 const styles = theme => ({
     root: {
@@ -31,22 +12,40 @@ const styles = theme => ({
         flexWrap: 'wrap',
         flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
         height: 200,
         width: '100%',
-        backgroundColor: theme.palette.background.paper,
+        background: `url(${imagee}) no-repeat`,
+        //backgroundColor: theme.palette.background.paper,
+    },
+    progressBar: {
+
     }
 });
 
-const mapStateToProps = state => {
-    return { 
-       ... state.app
-     };
-  }
+class Header extends Component {
+
+    constructor(...args) {
+        super(...args);
+        this.searchFieldChagenHandle = action => this.props.search(action);
+    }
+
+    render() {
+        const { classes } = this.props;
+
+        return(
+        <div className={classes.root}>
+            <SearchField onSearch={this.searchFieldChagenHandle} />
+            <SlideGalery />
+        </div>);
+    }
+
+};
   
 const mapDispatchToProps = dispatch => {
     return {
-        search: criteria => dispatch(actionType.search(criteria)),
+        search: action => dispatch(action),
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Header));

@@ -28,7 +28,7 @@ class ItemGalery extends Component {
 
   render() {
     const { classes, items } = this.props;
-    console.log('asd');
+    
     return (
       <div className={ classes.root }>
         <GridList cellHeight={180} cols={3} className={classes.gridList}>

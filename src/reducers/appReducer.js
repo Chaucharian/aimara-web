@@ -10,7 +10,7 @@ const app = (state = initialState, action)  => {
     let newItems;
     switch(action.type) {
       case SEARCH_CRITERIA:
-        return { ...state, currentSearchCriteria: action.criteria };
+        return { ...state, currentSearchCriteria: action.criteria, isFetching: true };
       case FETCH_ALL_IMAGES:
       state.isFetching = true;  
       return { ...state };

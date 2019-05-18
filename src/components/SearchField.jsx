@@ -1,52 +1,68 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
+import pinkColor from '@material-ui/core/colors/pink';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { search, searchButton } from '../actions/search';
 
-const styles = {
+const styles = () => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    width: '50%'
+  },
+  formControl: {
+    display: 'block',
+    width: '100%'
   },
   input: {
-    marginLeft: 8,
-    flex: 1,
+    width: '90%'
   },
   iconButton: {
     padding: 10,
+  },
+  cssLabel: {
+    '&$cssFocused': {
+      color: pinkColor[200],
+    },
+  },
+  cssFocused: {},
+  cssUnderline: {
+    '&:after': {
+      borderBottomColor: pinkColor[300],
+    },
   }
-};
+});
 
-class SearchField extends Component {
+const SearchField = props => {
+  const { onSearch, classes } = props;
 
-  constructor(...args) {
-    super(...args);
-    this.state = { value: '' };
-
-    this.changeHandler = event => this.updateState(event.target.value);//{ this.setState({ value: event.target.value }); }
-  }
-
-  updateState(value) {
-    const { onChange } = this.props;
-    onChange(value);
-    this.setState({value});
-  }
-
-
-  render() {
-    const { classes } = this.props;
-
-    return (
+  return (
       <div className={classes.root}>
-          <InputBase className={classes.input} value={this.state.value} onChange={this.changeHandler} placeholder="Busca tu alimento ideal :)" />
+        <FormControl className={classes.formControl}>
+          <InputLabel
+            htmlFor="custom-css-standard-input"
+            classes={{
+              root: classes.cssLabel,
+              focused: classes.cssFocused,}}>
+            Busca tu alimento :)
+          </InputLabel>
+          <Input
+            id="inputSearch"
+            onChange={ event => onSearch(search(event.target.value)) }
+            className={classes.input}
+            classes={{
+              underline: classes.cssUnderline,
+          }}/>
           <IconButton className={classes.iconButton} aria-label="Search">
-              <SearchIcon />
+          <SearchIcon />
           </IconButton>
+        </FormControl>
       </div>
     );
-  }
-  
 }
 
 SearchField.propTypes = {

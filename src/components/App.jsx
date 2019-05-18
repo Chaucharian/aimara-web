@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import ItemGalery from './ItemGalery';
+import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
+import LinearProgressBar from "./LinearProgressBar";
+import ItemGalery from './ItemGalery';
 import { FETCH_ALL_IMAGES } from '../actions/types';
+
+const styles = () => ({
+  linearPercentage: {
+    height: '4px'
+  }
+});
+
 
 class App extends Component {
 
@@ -17,7 +26,7 @@ class App extends Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { items, isFetching, classes } = this.props;
     return(   
       <CssBaseline>
         <Grid 
@@ -25,8 +34,9 @@ class App extends Component {
         direction="column"
         justify="center"
         alignItems="center">
-          <Header />
-          <ItemGalery items={items} />
+        <Header />
+        { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
+        <ItemGalery items={items} />
         </Grid>
       </CssBaseline>
     );
@@ -34,7 +44,10 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return state.app
+  return {
+    items: state.app.items,
+    isFetching: state.app.isFetching
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -43,4 +56,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));

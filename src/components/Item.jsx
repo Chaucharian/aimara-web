@@ -17,7 +17,8 @@ const styles = () => ({
             height: 300
         },
         image: {
-            height: '100%'
+            height: '100%',
+            width: '100%'
         }
 });
 
