@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Galery from './Galery.jsx';
+import ItemGalery from './ItemGalery';
 import Header from './Header';
 import { FETCH_ALL_IMAGES } from '../actions/types';
 
@@ -18,7 +18,6 @@ class App extends Component {
 
   render() {
     const { items } = this.props;
-    console.log('render');
     return(   
       <CssBaseline>
         <Grid 
@@ -27,7 +26,7 @@ class App extends Component {
         justify="center"
         alignItems="center">
           <Header />
-          <Galery images={items} />
+          <ItemGalery items={items} />
         </Grid>
       </CssBaseline>
     );
@@ -35,9 +34,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return { 
-     ...state.app
-   };
+  return state.app
 }
 
 const mapDispatchToProps = dispatch => {
