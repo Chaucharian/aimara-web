@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import SearchField from "./SearchField";
 import SlideGalery from "./SlideGalery";
+import TradeButton from "./TradeButton";
 import * as actionType from '../actions/search';
 import imagee from '../images/aimara_nueces.jpg';
 
@@ -37,6 +38,7 @@ class Header extends Component {
         <div className={classes.root}>
             <SearchField onSearch={this.searchFieldChagenHandle} />
             <SlideGalery />
+            <TradeButton />
         </div>);
     }
 

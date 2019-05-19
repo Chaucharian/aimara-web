@@ -26,7 +26,7 @@ export function* loadImagesByCriteria(action) {
     if(action.criteria === '') {
       yield put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items });
     } else {
-      //yield call(delay, 2000)
+      yield call(delay, 2000)
       const result =  items.filter(item => item.title === action.criteria);
       yield  put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items: result });
     }

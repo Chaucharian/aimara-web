@@ -34,9 +34,9 @@ class App extends Component {
         direction="column"
         justify="center"
         alignItems="center">
-        <Header />
-        { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
-        <ItemGalery items={items} />
+          <Header />
+          { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
+          <ItemGalery items={items} />
         </Grid>
       </CssBaseline>
     );
