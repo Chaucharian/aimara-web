@@ -15,7 +15,7 @@ const app = (state = initialState, action)  => {
       state.isFetching = true;  
       return { ...state };
       case FETCH_ALL_IMAGES_SUCCESS:
-        return { ...state, items: action.items, isFetching: false };
+        return { ...state, items: [...action.items], isFetching: false };
       case ADD_ITEM:
         newItems = [...state.items];
         newItems.map( item => {

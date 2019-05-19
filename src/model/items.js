@@ -47,13 +47,13 @@ const items = [
       src: kit_oliva,
       title: 'aceites',
       amount: 0,
-      id: 5
+      id: 7
     },
     {
       src: harian_de_coca,
       title: 'coca',
       amount: 0,
-      id: 6
+      id: 8
     },
   ];
 
