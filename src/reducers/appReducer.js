@@ -1,9 +1,10 @@
-import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITEM, ADD_ITEM } from '../actions/types';
+import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW } from '../actions/types';
 
 const initialState = {
     items: [],
     currentSearchCriteria: '',
-    isFetching: false
+    isFetching: false,
+    currentView: 'list'
 }
 
 const app = (state = initialState, action)  => {
@@ -11,6 +12,13 @@ const app = (state = initialState, action)  => {
     switch(action.type) {
       case SEARCH_CRITERIA:
         return { ...state, currentSearchCriteria: action.criteria, isFetching: true };
+      case CHANGE_VIEW:
+        if(action.payload === 'list') {
+          state.currentView = 'list';
+        } else {
+          state.currentView = 'form';
+        }
+        return { ...state };
       case FETCH_ALL_IMAGES:
       state.isFetching = true;  
       return { ...state };

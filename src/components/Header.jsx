@@ -6,6 +6,7 @@ import SlideGalery from "./SlideGalery";
 import TradeButton from "./TradeButton";
 import * as actionType from '../actions/search';
 import imagee from '../images/aimara_nueces.jpg';
+import { access } from "fs";
 
 const styles = theme => ({
     root: {
@@ -28,7 +29,8 @@ class Header extends Component {
 
     constructor(...args) {
         super(...args);
-        this.searchFieldChagenHandle = action => this.props.search(action);
+        this.searchFieldChangeHandler = action => this.props.search(action);
+        this.changeViewHandler = action => this.props.changeView(action);
     }
 
     render() {
@@ -36,9 +38,9 @@ class Header extends Component {
 
         return(
         <div className={classes.root}>
-            <SearchField onSearch={this.searchFieldChagenHandle} />
+            <SearchField onSearch={this.searchFieldChangeHandler} />
             <SlideGalery />
-            <TradeButton />
+            <TradeButton click={this.changeViewHandler}/>
         </div>);
     }
 
@@ -47,6 +49,7 @@ class Header extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         search: action => dispatch(action),
+        changeView: action => dispatch(action),
     }
   }
 

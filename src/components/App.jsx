@@ -26,25 +26,44 @@ class App extends Component {
   }
 
   render() {
-    const { items, isFetching, classes } = this.props;
-    return(   
-      <CssBaseline>
-        <Grid 
-        container
-        direction="column"
-        justify="center"
-        alignItems="center">
-          <Header />
-          { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
-          <ItemGalery items={items} />
+    const { items, isFetching, currentView, classes } = this.props;
+
+    if(currentView === 'list') {
+      return(   
+        <CssBaseline>
+          <Grid 
+          container
+          direction="column"
+          justify="center"
+          alignItems="center">
+            <Header />
+            { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
+            <ItemGalery items={items} />
+          </Grid>
+        </CssBaseline>
+      );
+    } else {
+      return(   
+        <CssBaseline>
+          <Grid 
+          container
+          direction="column"
+          justify="center"
+          alignItems="center">
+            <Header />
+            { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
+EAA
         </Grid>
-      </CssBaseline>
-    );
+        </CssBaseline>
+      );
+    }
+    
   }
 }
 
 const mapStateToProps = state => {
   return {
+    currentView: state.app.currentView,
     items: state.app.items,
     isFetching: state.app.isFetching
   }

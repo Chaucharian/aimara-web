@@ -3,15 +3,17 @@ import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import ViewModule from '@material-ui/icons/ViewModule';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import green from '@material-ui/core/colors/green';
+import { SET_ITEM_LIST_VIEW, SET_FORM_VIEW } from '../actions/types';
+import { changeView } from '../actions/viewButton';
 
 
 const styles = theme => ({
     root: {
-      position: 'absolute',
+      position: 'relative',
       top: '10%',
       left: '40%'
     },
@@ -34,13 +36,16 @@ class TradeButton extends Component {
     constructor(...args) {
         super(...args);
         this.state = { value: 1 }
+        this.clickHandler = action => this.props.click(action);
     }
 
     handleChange(value) {
         if(value === 1) {
             this.setState({ value: 0 });    
+            this.clickHandler(changeView('list'));
         } else {
-            this.setState({ value: 1 });    
+            this.setState({ value: 1 });  
+           this.clickHandler(changeView('form'));  
         }
     }
     
@@ -54,12 +59,12 @@ class TradeButton extends Component {
             {
               color: 'primary',
               className: classes.fab,
-              icon: <AddIcon />,
+              icon: <ShoppingCart />,
             },
             {
               color: 'secondary',
               className: classes.fab,
-              icon: <EditIcon />,
+              icon: <ViewModule />,
             }
           ];
     
