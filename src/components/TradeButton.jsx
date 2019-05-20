@@ -9,23 +9,28 @@ import { changeView } from '../actions/viewButton';
 
 const styles = theme => ({
     root: {
-      position: 'fixed',
-      top: '20%',
-      left: '90%',
-      zIndex: '10',
+        position: 'fixed',
+        top: '20%',
+        left: '90%',
+        zIndex: '10',
+        fontFamily: 'Arial'
     },
-    button: {
-      transition: 'background-color 500ms ease-out !important'
+    number: {
+        transition: 'color 500ms ease-out',
+        color: '#ffffff00'
+    },
+    showNumber: {
+        color: '#5f9ed0'
     },
     fab: {
-      position: 'absolute',
-      bottom: theme.spacing.unit * 2,
-      right: theme.spacing.unit * 2,
+        position: 'absolute',
+        bottom: theme.spacing.unit * 2,
+        right: theme.spacing.unit * 2,
     },
     change: {
-      backgroundColor: '#b38dd0'
+        backgroundColor: '#b38dd0'
     }
-  });
+});
 
 class TradeButton extends Component {
 
@@ -46,7 +51,8 @@ class TradeButton extends Component {
     }
     
     render() {
-        const { classes, theme, colorTransition } = this.props;
+        const { classes, theme } = this.props;
+        const {  userActionValue, userPicking } = this.props.transitionData;
         const transitionDuration = {
           enter: theme.transitions.duration.enteringScreen,
           exit: theme.transitions.duration.leavingScreen,
@@ -65,6 +71,7 @@ class TradeButton extends Component {
           ];
         return (
             <div className={classes.root}>
+            <b className={userPicking ? classes.showNumber : classes.number }>{userActionValue}</b>
             { buttons.map( (fab, index) => (
                 <Zoom
                   key={fab.color}
@@ -74,7 +81,6 @@ class TradeButton extends Component {
                     transitionDelay: `${this.state.value === index ? transitionDuration.exit : 0}ms`,
                     transition: 'background-color 500ms ease-out'
                   }}
-                
                   unmountOnExit>
                   <Fab className={fab.className} color={fab.color} onClick={ () => this.handleChange(this.state.value) }>
                     {fab.icon}

@@ -1,11 +1,12 @@
-import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW, CHANGE_COLOR_BUTTON } from '../actions/types';
+import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW, SHOW_USER_ACTION_VALUE } from '../actions/types';
 
 const initialState = {
     items: [],
     currentSearchCriteria: '',
     isFetching: false,
     currentView: 'list',
-    colorButtonTransition: false
+    userPicking: false,
+    userActionValue: ''
 }
 
 const app = (state = initialState, action)  => {
@@ -20,8 +21,8 @@ const app = (state = initialState, action)  => {
           state.currentView = 'form';
         }
         return { ...state };
-      case CHANGE_COLOR_BUTTON: 
-        return { ...state, colorButtonTransition: false };
+      case SHOW_USER_ACTION_VALUE: 
+        return { ...state, userPicking: false, userActionValue: action.payload };
       case FETCH_ALL_IMAGES:
       state.isFetching = true;  
       return { ...state };
@@ -34,7 +35,7 @@ const app = (state = initialState, action)  => {
             item.amount += 1;
           }
         });
-        return { ...state, items: newItems, colorButtonTransition: true };
+        return { ...state, items: newItems, userPicking: true };
       case REMOVE_ITEM:
         newItems = [...state.items];
         newItems.map( item => {
@@ -42,7 +43,7 @@ const app = (state = initialState, action)  => {
             item.amount -= 1;
           }
         });
-        return { ...state, items: newItems,  colorButtonTransition: true };
+        return { ...state, items: newItems,  userPicking: true };
       default :
         return state;
     }

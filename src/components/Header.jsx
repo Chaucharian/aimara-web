@@ -32,14 +32,13 @@ class Header extends Component {
     }
 
     render() {
-        const { classes, colorButtonTransition } = this.props;
-        console.log(colorButtonTransition);
+        const { classes, userPicking, userActionValue } = this.props;
 
         return(
         <div className={classes.root}>
             <SearchField onSearch={this.searchFieldChangeHandler} />
             <SlideGalery />
-            <TradeButton click={this.changeViewHandler} colorTransition={colorButtonTransition}/>
+            <TradeButton click={this.changeViewHandler} transitionData={ {userPicking, userActionValue} }/>
         </div>);
     }
 
@@ -47,7 +46,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        colorButtonTransition: state.app.colorButtonTransition,
+        userActionValue: state.app.userActionValue,
+        userPicking: state.app.userPicking,
     }
 }
 

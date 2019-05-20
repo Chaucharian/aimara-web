@@ -3,10 +3,10 @@ import * as actionType from '../actions/types';
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-export function* buttonColorChange() {
+export function* tradeButtonResponse(action) {
   try {
-    yield delay(200);
-    yield put({ type: actionType.CHANGE_COLOR_BUTTON });
+    yield delay(500);
+    yield put({ type: actionType.SHOW_USER_ACTION_VALUE, payload: action.type === actionType.ADD_ITEM ? '+1' : '-1' });
 
   } catch(error) {
     yield put({ type:'Delay failed'});
