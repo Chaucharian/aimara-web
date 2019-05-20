@@ -2,14 +2,20 @@ import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITE
 
 const initialState = {
     items: [],
+    orderList: [],
     currentSearchCriteria: '',
     isFetching: false,
     currentView: 'list',
-    colorButtonTransition: false
+}
+
+Array.prototype.unique = function() {
+  return this.filter(function (value, index, self) { 
+    return self.indexOf(value) === index;
+  });
 }
 
 const app = (state = initialState, action)  => {
-    let newItems;
+    let items, orderList;
     switch(action.type) {
       case SEARCH_CRITERIA:
         return { ...state, currentSearchCriteria: action.criteria, isFetching: true };
@@ -20,29 +26,41 @@ const app = (state = initialState, action)  => {
           state.currentView = 'form';
         }
         return { ...state };
-      case CHANGE_COLOR_BUTTON: 
-        return { ...state, colorButtonTransition: false };
       case FETCH_ALL_IMAGES:
       state.isFetching = true;  
       return { ...state };
       case FETCH_ALL_IMAGES_SUCCESS:
         return { ...state, items: [...action.items], isFetching: false };
       case ADD_ITEM:
-        newItems = [...state.items];
-        newItems.map( item => {
+        items = [...state.items];
+        orderList = [...state.orderList];
+        items.map( item => {
           if(item.id === action.id) {
-            item.amount += 1;
+            item.amount += 1;           
           }
         });
-        return { ...state, items: newItems, colorButtonTransition: true };
+        orderList.push(action.id);
+        orderList = orderList.unique();
+        return { ...state, items, orderList };
       case REMOVE_ITEM:
-        newItems = [...state.items];
-        newItems.map( item => {
-          if(item.id === action.id && item.amount != 0) {
+        items = [...state.items];
+        orderList = [...state.orderList];
+
+        items.map( item => {
+          if(item.id === action.id && item.amount !== 0) {
             item.amount -= 1;
-          }
+            if(item.amount === 0) {
+              orderList.map( id => {
+                if(id === item.id) {
+                  orderList.splice(orderList.indexOf(id), 1);
+                  orderList = [...orderList];
+                }
+              });
+            }
+          } 
         });
-        return { ...state, items: newItems,  colorButtonTransition: true };
+
+        return { ...state, items, orderList };
       default :
         return state;
     }

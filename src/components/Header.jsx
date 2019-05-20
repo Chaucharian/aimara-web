@@ -32,24 +32,17 @@ class Header extends Component {
     }
 
     render() {
-        const { classes, colorButtonTransition } = this.props;
-        console.log(colorButtonTransition);
+        const { classes } = this.props;
 
         return(
         <div className={classes.root}>
             <SearchField onSearch={this.searchFieldChangeHandler} />
             <SlideGalery />
-            <TradeButton click={this.changeViewHandler} colorTransition={colorButtonTransition}/>
+            <TradeButton click={this.changeViewHandler} />
         </div>);
     }
 
 };
-
-const mapStateToProps = state => {
-    return {
-        colorButtonTransition: state.app.colorButtonTransition,
-    }
-}
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -58,4 +51,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Header));
