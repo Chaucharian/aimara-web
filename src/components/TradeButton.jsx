@@ -5,37 +5,33 @@ import PropTypes from 'prop-types';
 import Fab from '@material-ui/core/Fab';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import ViewModule from '@material-ui/icons/ViewModule';
-import UpIcon from '@material-ui/icons/KeyboardArrowUp';
-import green from '@material-ui/core/colors/green';
-import { SET_ITEM_LIST_VIEW, SET_FORM_VIEW } from '../actions/types';
 import { changeView } from '../actions/viewButton';
-
 
 const styles = theme => ({
     root: {
-      position: 'relative',
-      top: '10%',
-      left: '40%'
+      position: 'fixed',
+      top: '20%',
+      left: '90%',
+      zIndex: '10',
+    },
+    button: {
+      transition: 'background-color 500ms ease-out !important'
     },
     fab: {
       position: 'absolute',
       bottom: theme.spacing.unit * 2,
       right: theme.spacing.unit * 2,
     },
-    fabGreen: {
-      color: theme.palette.common.white,
-      backgroundColor: green[500],
-      '&:hover': {
-        backgroundColor: green[600],
-      },
-    },
+    change: {
+      backgroundColor: '#b38dd0'
+    }
   });
 
 class TradeButton extends Component {
 
     constructor(...args) {
         super(...args);
-        this.state = { value: 1 }
+        this.state = { value: 0 }
         this.clickHandler = action => this.props.click(action);
     }
 
@@ -50,7 +46,7 @@ class TradeButton extends Component {
     }
     
     render() {
-        const { classes, theme } = this.props;
+        const { classes, theme, colorTransition } = this.props;
         const transitionDuration = {
           enter: theme.transitions.duration.enteringScreen,
           exit: theme.transitions.duration.leavingScreen,
@@ -67,7 +63,6 @@ class TradeButton extends Component {
               icon: <ViewModule />,
             }
           ];
-    
         return (
             <div className={classes.root}>
             { buttons.map( (fab, index) => (
@@ -77,7 +72,9 @@ class TradeButton extends Component {
                   timeout={transitionDuration}
                   style={{
                     transitionDelay: `${this.state.value === index ? transitionDuration.exit : 0}ms`,
+                    transition: 'background-color 500ms ease-out'
                   }}
+                
                   unmountOnExit>
                   <Fab className={fab.className} color={fab.color} onClick={ () => this.handleChange(this.state.value) }>
                     {fab.icon}

@@ -28,7 +28,6 @@ class App extends Component {
   render() {
     const { items, isFetching, currentView, classes } = this.props;
 
-    if(currentView === 'list') {
       return(   
         <CssBaseline>
           <Grid 
@@ -38,26 +37,10 @@ class App extends Component {
           alignItems="center">
             <Header />
             { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
-            <ItemGalery items={items} />
-          </Grid>
-        </CssBaseline>
-      );
-    } else {
-      return(   
-        <CssBaseline>
-          <Grid 
-          container
-          direction="column"
-          justify="center"
-          alignItems="center">
-            <Header />
-            { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
-EAA
+            { currentView === 'list' ? <ItemGalery items={items} /> : 'EAA' }
         </Grid>
         </CssBaseline>
       );
-    }
-    
   }
 }
 

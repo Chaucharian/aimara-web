@@ -1,10 +1,11 @@
-import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW } from '../actions/types';
+import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW, CHANGE_COLOR_BUTTON } from '../actions/types';
 
 const initialState = {
     items: [],
     currentSearchCriteria: '',
     isFetching: false,
-    currentView: 'list'
+    currentView: 'list',
+    colorButtonTransition: false
 }
 
 const app = (state = initialState, action)  => {
@@ -19,6 +20,8 @@ const app = (state = initialState, action)  => {
           state.currentView = 'form';
         }
         return { ...state };
+      case CHANGE_COLOR_BUTTON: 
+        return { ...state, colorButtonTransition: false };
       case FETCH_ALL_IMAGES:
       state.isFetching = true;  
       return { ...state };
@@ -31,7 +34,7 @@ const app = (state = initialState, action)  => {
             item.amount += 1;
           }
         });
-        return { ...state, items: newItems };
+        return { ...state, items: newItems, colorButtonTransition: true };
       case REMOVE_ITEM:
         newItems = [...state.items];
         newItems.map( item => {
@@ -39,7 +42,7 @@ const app = (state = initialState, action)  => {
             item.amount -= 1;
           }
         });
-        return { ...state, items: newItems };
+        return { ...state, items: newItems,  colorButtonTransition: true };
       default :
         return state;
     }

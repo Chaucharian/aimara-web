@@ -7,6 +7,7 @@ import Item from './Item';
 
 const styles = theme => ({
   root: {
+    width: '100%',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
@@ -16,6 +17,7 @@ const styles = theme => ({
   gridList: {
     width: window.width,
     height: window.height,
+    flexGrow: '3'
   }
 });
 

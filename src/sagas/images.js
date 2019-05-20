@@ -23,10 +23,10 @@ export function* loadImagesByCriteria(action) {
 
     //Tell the store to save the user Info also activate loadDashboardSecuenced
 //    yield put(fetchWeatherSuccess(weather));
+
     if(action.criteria === '') {
       yield put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items });
     } else {
-      yield call(delay, 2000)
       const result =  items.filter(item => item.title === action.criteria);
       yield  put({ type: actionType.FETCH_ALL_IMAGES_SUCCESS, items: result });
     }

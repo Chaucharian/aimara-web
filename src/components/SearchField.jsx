@@ -19,7 +19,7 @@ const styles = () => ({
     width: '100%'
   },
   input: {
-    width: '90%'
+    width: '80%'
   },
   iconButton: {
     padding: 10,

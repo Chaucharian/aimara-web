@@ -4,9 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchField from "./SearchField";
 import SlideGalery from "./SlideGalery";
 import TradeButton from "./TradeButton";
-import * as actionType from '../actions/search';
 import imagee from '../images/aimara_nueces.jpg';
-import { access } from "fs";
 
 const styles = theme => ({
     root: {
@@ -34,23 +32,30 @@ class Header extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, colorButtonTransition } = this.props;
+        console.log(colorButtonTransition);
 
         return(
         <div className={classes.root}>
             <SearchField onSearch={this.searchFieldChangeHandler} />
             <SlideGalery />
-            <TradeButton click={this.changeViewHandler}/>
+            <TradeButton click={this.changeViewHandler} colorTransition={colorButtonTransition}/>
         </div>);
     }
 
 };
-  
+
+const mapStateToProps = state => {
+    return {
+        colorButtonTransition: state.app.colorButtonTransition,
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         search: action => dispatch(action),
         changeView: action => dispatch(action),
     }
-  }
+}
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Header));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));
