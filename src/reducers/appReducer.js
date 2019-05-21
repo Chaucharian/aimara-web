@@ -1,7 +1,8 @@
-import { SEARCH_CRITERIA, FETCH_ALL_IMAGES, FETCH_ALL_IMAGES_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW, CHANGE_COLOR_BUTTON } from '../actions/types';
+import { SEARCH_CRITERIA, FETCH_ITEMS, FETCH_ITEMS_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW, GET_ORDER_LIST } from '../actions/types';
 
 const initialState = {
     items: [],
+    currentOrderIds: [],
     orderList: [],
     currentSearchCriteria: '',
     isFetching: false,
@@ -15,7 +16,7 @@ Array.prototype.unique = function() {
 }
 
 const app = (state = initialState, action)  => {
-    let items, orderList;
+    let items = [], currentOrderIds = [], orderList = [];
     switch(action.type) {
       case SEARCH_CRITERIA:
         return { ...state, currentSearchCriteria: action.criteria, isFetching: true };
@@ -26,41 +27,53 @@ const app = (state = initialState, action)  => {
           state.currentView = 'form';
         }
         return { ...state };
-      case FETCH_ALL_IMAGES:
+      case FETCH_ITEMS:
       state.isFetching = true;  
       return { ...state };
-      case FETCH_ALL_IMAGES_SUCCESS:
+      case FETCH_ITEMS_SUCCESS:
         return { ...state, items: [...action.items], isFetching: false };
+      case GET_ORDER_LIST:
+        currentOrderIds = [...state.currentOrderIds];
+        items = [...state.items];
+        currentOrderIds.map( orderId => {
+          items.map( item => {
+            if(item.id === orderId) {
+              orderList.push(item);
+            }
+          });
+        });
+        orderList = [...orderList];
+        return { ...state, orderList };
       case ADD_ITEM:
         items = [...state.items];
-        orderList = [...state.orderList];
+        currentOrderIds = [...state.currentOrderIds];
         items.map( item => {
           if(item.id === action.id) {
             item.amount += 1;           
           }
         });
-        orderList.push(action.id);
-        orderList = orderList.unique();
-        return { ...state, items, orderList };
+        currentOrderIds.push(action.id);
+        currentOrderIds = currentOrderIds.unique();
+        return { ...state, items, currentOrderIds };
       case REMOVE_ITEM:
         items = [...state.items];
-        orderList = [...state.orderList];
+        currentOrderIds = [...state.currentOrderIds];
 
         items.map( item => {
           if(item.id === action.id && item.amount !== 0) {
             item.amount -= 1;
             if(item.amount === 0) {
-              orderList.map( id => {
+              currentOrderIds.map( id => {
                 if(id === item.id) {
-                  orderList.splice(orderList.indexOf(id), 1);
-                  orderList = [...orderList];
+                  currentOrderIds.splice(currentOrderIds.indexOf(id), 1);
+                  currentOrderIds = [...currentOrderIds];
                 }
               });
             }
           } 
         });
 
-        return { ...state, items, orderList };
+        return { ...state, items, currentOrderIds };
       default :
         return state;
     }

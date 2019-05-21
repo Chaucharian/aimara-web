@@ -6,7 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
 import LinearProgressBar from "./LinearProgressBar";
 import ItemGalery from './ItemGalery';
-import { FETCH_ALL_IMAGES } from '../actions/types';
+import { FETCH_ITEMS } from '../actions/types';
+import OrderForm from './OrderForm';
 
 const styles = () => ({
   linearPercentage: {
@@ -37,7 +38,7 @@ class App extends Component {
           alignItems="center">
             <Header />
             { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
-            { currentView === 'list' ? <ItemGalery items={items} /> : 'EAA' }
+            { currentView === 'list' ? <ItemGalery items={items} /> : <OrderForm /> }
         </Grid>
         </CssBaseline>
       );
@@ -54,7 +55,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadAllImages: () => dispatch({ type: FETCH_ALL_IMAGES }),
+    loadAllImages: () => dispatch({ type: FETCH_ITEMS }),
   }
 }
 
