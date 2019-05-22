@@ -1,21 +1,39 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import { GET_ORDER_LIST } from "../actions/types";
+import OrderList from "./OrderList";
 
-const style = () => ({});
+const style = () => ({
+    root: {
+        fontFamily: 'Roboto',
+        width: '100%',
+        textAlign: 'center'
+    }
+});
 
 class OrderForm extends Component {
     constructor(...args) {
         super(...args);
 
         this.getOrderList = () => this.props.getOrderList();
+        this.clickHandler = action => this.props.onItemClick(action);
     }
 
     render() {
-        const { orderList } = this.props;
+        const { orderList, classes } = this.props;
 
-        return( orderList.map( item => <b>titulo {item.title} y {item.amount}</b>) );
+        return( 
+           <div className={classes.root} >
+               <OrderList list={orderList} onItemClick={this.clickHandler} />
+           </div>
+        );
     }
 }
 
@@ -27,7 +45,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getOrderList: dispatch({ type: GET_ORDER_LIST })
+        getOrderList: dispatch({ type: GET_ORDER_LIST }),
+        onItemClick: action => dispatch(action)
     }
 }
 

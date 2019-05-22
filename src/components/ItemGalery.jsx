@@ -57,9 +57,7 @@ const mapStateToProps = state => {
 */
 const mapDispatchToProps = dispatch => {
   return {
-    onItemClick: action => {
-      dispatch(action)
-    }
+    onItemClick: action => dispatch(action)
   }
 }
 

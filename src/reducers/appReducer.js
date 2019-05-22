@@ -1,4 +1,5 @@
-import { SEARCH_CRITERIA, FETCH_ITEMS, FETCH_ITEMS_SUCCESS, REMOVE_ITEM, ADD_ITEM, CHANGE_VIEW, GET_ORDER_LIST } from '../actions/types';
+import { SEARCH_CRITERIA, FETCH_ITEMS, FETCH_ITEMS_SUCCESS, REMOVE_ITEM,
+   ADD_ITEM, CHANGE_VIEW, GET_ORDER_LIST, DELETE_ITEM } from '../actions/types';
 
 const initialState = {
     items: [],
@@ -26,6 +27,7 @@ const app = (state = initialState, action)  => {
         } else {
           state.currentView = 'form';
         }
+        
         return { ...state };
       case FETCH_ITEMS:
       state.isFetching = true;  
@@ -43,6 +45,7 @@ const app = (state = initialState, action)  => {
           });
         });
         orderList = [...orderList];
+
         return { ...state, orderList };
       case ADD_ITEM:
         items = [...state.items];
@@ -54,6 +57,7 @@ const app = (state = initialState, action)  => {
         });
         currentOrderIds.push(action.id);
         currentOrderIds = currentOrderIds.unique();
+
         return { ...state, items, currentOrderIds };
       case REMOVE_ITEM:
         items = [...state.items];
@@ -74,6 +78,24 @@ const app = (state = initialState, action)  => {
         });
 
         return { ...state, items, currentOrderIds };
+        case DELETE_ITEM:
+          currentOrderIds = [...state.currentOrderIds];
+          items = [...state.items];
+
+          currentOrderIds.map( id => {
+            if(id === action.id) {
+              currentOrderIds.splice(currentOrderIds.indexOf(id), 1);
+              items.map( item => {
+                if(item.id === id) {
+                  item.amount = 0;
+                }
+              });
+              currentOrderIds = [...currentOrderIds];
+              items = [...items];
+            }
+          });
+
+          return { ...state, items, currentOrderIds };
       default :
         return state;
     }

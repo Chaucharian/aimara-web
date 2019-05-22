@@ -46,7 +46,7 @@ class TradeButton extends Component {
     }
     
     render() {
-        const { classes, theme, colorTransition } = this.props;
+        const { classes, theme } = this.props;
         const transitionDuration = {
           enter: theme.transitions.duration.enteringScreen,
           exit: theme.transitions.duration.leavingScreen,

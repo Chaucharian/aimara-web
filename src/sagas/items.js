@@ -35,3 +35,7 @@ export function* fetchItemsByCriteria(action) {
  //   yield put(fetchWeatherFailure('Fetching failed'));
   }
 }
+
+export function* refreshOrderList() {
+  yield put({ type: actionType.GET_ORDER_LIST });
+}
