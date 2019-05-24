@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { GET_ORDER_LIST } from "../actions/types";
 import OrderList from "./OrderList";
 import Form from "./Form";
+import ToggleList from "./ToggleList";
 
 const style = () => ({
     root: {
@@ -33,7 +34,9 @@ class Order extends Component {
         return( 
            <div className={classes.root} >
                 <h3 className={classes.font}>Tus productos</h3>
-                <OrderList list={orderList} onItemClick={this.clickHandler} />
+                <ToggleList>
+                    <OrderList list={orderList} onItemClick={this.clickHandler} />
+                </ToggleList>
                 <h3 className={classes.font}>Tus datos</h3>
                 <Form />
            </div>
