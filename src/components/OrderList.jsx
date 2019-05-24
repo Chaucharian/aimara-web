@@ -23,7 +23,7 @@ const OrderList = props => {
     return( 
         <List component="nav" className={classes.root}>
         { 
-        list.length <= 0 ? <h3 className={classes.font}>Aun no cargaste ningun alimento :(</h3> : 
+        list.length <= 0 ? <h3 className={classes.font}>Aun nada :(</h3> : 
             list.map( item => {
                 return (
                     <ListItem key={item.id} button>

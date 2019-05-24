@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import { GET_ORDER_LIST } from "../actions/types";
 import OrderList from "./OrderList";
+import Form from "./Form";
 
 const style = () => ({
     root: {
         fontFamily: 'Roboto',
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column'
+    },
+    font: {
+        fontWeight: 400
     }
 });
 
-class OrderForm extends Component {
+class Order extends Component {
     constructor(...args) {
         super(...args);
 
@@ -31,7 +32,10 @@ class OrderForm extends Component {
 
         return( 
            <div className={classes.root} >
-               <OrderList list={orderList} onItemClick={this.clickHandler} />
+                <h3 className={classes.font}>Tus productos</h3>
+                <OrderList list={orderList} onItemClick={this.clickHandler} />
+                <h3 className={classes.font}>Tus datos</h3>
+                <Form />
            </div>
         );
     }
@@ -50,4 +54,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(OrderForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(Order));

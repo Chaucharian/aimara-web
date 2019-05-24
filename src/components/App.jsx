@@ -7,15 +7,13 @@ import Header from './Header';
 import LinearProgressBar from "./LinearProgressBar";
 import ItemGalery from './ItemGalery';
 import { FETCH_ITEMS } from '../actions/types';
-import OrderForm from './OrderForm';
+import Order from './Order';
 
 const styles = () => ({
   linearPercentage: {
     height: '4px'
   }
 });
-
-
 class App extends Component {
 
   constructor(...args) {
@@ -38,7 +36,7 @@ class App extends Component {
           alignItems="center">
             <Header />
             { isFetching ? <LinearProgressBar /> : <div className={classes.linearPercentage}></div> }
-            { currentView === 'list' ? <ItemGalery items={items} /> : <OrderForm /> }
+            { currentView === 'list' ? <ItemGalery items={items} /> : <Order /> }
         </Grid>
         </CssBaseline>
       );
