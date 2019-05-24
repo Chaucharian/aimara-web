@@ -9,7 +9,8 @@ const style = () => ({
     root: {
         fontFamily: 'Roboto',
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'center',
+        boxShadow: '0px 0px 0px 0px'
     },
     showList: {
         display: 'block'
